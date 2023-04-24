@@ -15,7 +15,7 @@
 int handleprint(const char *fmt, int *id, va_list l, char b[],
 	int f, int w, int p, int s)
 {
-	int i, unknowlen = 0, printedchars = -1
+	int i, unknowlen = 0, printedchars = -1;
 	fmt_t fmt_types[] = {
 		{'c', printchar}, {'s', printstring}, {'%', printpercent},
 		{'i', printint}, {'d', printint}, {'b', printbinary},
