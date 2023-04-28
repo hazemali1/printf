@@ -406,7 +406,8 @@ int _printf(const char *format, ...)
                 	{
                 		e++;
                 		r--;
-					}
+				o++;
+			}
                     if (format[e + 1] == ' ' && format[e + 2] == '+')
                     {
                         e++;
@@ -459,9 +460,7 @@ int _printf(const char *format, ...)
                             if (z == INT_MIN)
                             {
                                 _putchar('-');
-                                printunnumber(INT_MIN);
-                                r += 10;
-                                o--;
+                               o += printunnumber(INT_MIN);
                             }
                             else
                             {
