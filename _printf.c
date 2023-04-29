@@ -11,9 +11,10 @@ void _put(char str[], int size)
         write(1, &str[0], size);
 }
 
-int printnumber(int number, int k)
+int printnumber(int number, int k, int t)
 {
-    int  e, r, o = 2, y = 1, u, p, h = 10, i = 0, l, m = 0;
+    int  e, r, o = 2, y = 1, u, p, h = 10, i = 0, l, m = 0, q, w = 6, s, f = -1, v = 0;
+
 
     if (k == 1 && number > 0)
     {
@@ -24,10 +25,78 @@ int printnumber(int number, int k)
         _putchar(' ');
         i++;
     }
+    if (k == 5 && number< 100000 && number > -10000)
+    {
+        q = number;
+        if (q < 10 && q >= 0)
+        {
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            f += 5;
+        }
+        else
+        {
+            if (q < 0)
+            {
+                _putchar('-');
+                q *= -1;
+                v = 1;
+            }
+            while (q / 10 > 0)
+            {
+                q = q / 10;
+                w--;
+            }
+            for (s = 0; s < w - 1; s++)
+            {
+                _putchar('0');
+                f++;
+            }
+        }
+
+    }
+    if (t == 6 && number < 100000 && number > -10000 && k != 5)
+    {
+        q = number;
+        if (q < 10 && q >= 0)
+        {
+            _putchar(' ');
+            _putchar(' ');
+            _putchar(' ');
+            _putchar(' ');
+            _putchar(' ');
+            f += 5;
+        }
+        else
+        {
+            if (q < 0)
+            {
+                q *= -1;
+                w--;
+            }
+            while (q / 10 > 0)
+            {
+                q = q / 10;
+                w--;
+            }
+            for (s = 0; s < w - 1; s++)
+            {
+                _putchar(' ');
+                f++;
+            }
+        }
+
+    }
     if (number < 0)
     {
         number *= -1;
-        _putchar('-');
+        if (v == 0)
+        {
+            _putchar('-');
+        }
         if (k != 1)
         {
             i++;
@@ -36,7 +105,7 @@ int printnumber(int number, int k)
     if (number < 10)
     {
         _putchar(number + '0');
-        return (1);
+        return (1 + f);
     }
     r = number;
     while (r / 10 >= 10)
@@ -76,7 +145,7 @@ int printnumber(int number, int k)
             h *= 10;
         }
     }
-    return (o + i);
+    return (o + i + f);
 }
 unsigned int printunnumber(unsigned int number)
 {
@@ -84,7 +153,7 @@ unsigned int printunnumber(unsigned int number)
 
     if (number < 10)
     {
-        printnumber(number, 0);
+        printnumber(number, 0, 0);
         return (1);
     }
     r = number;
@@ -102,7 +171,7 @@ unsigned int printunnumber(unsigned int number)
         if (e == 0)
         {
             u = number / y;
-            printnumber(u, 0);
+            printnumber(u, 0, 0);
             y /= 10;
         }
         else
@@ -120,7 +189,7 @@ unsigned int printunnumber(unsigned int number)
                 m++;
             }
             m = 0;
-            printnumber(p, 0);
+            printnumber(p, 0, 0);
             y /= 10;
             h *= 10;
         }
@@ -145,21 +214,40 @@ int binary(int n)
     }
     for (j = i - 1; j >= 0; j--)
     {
-        printnumber(binaryNum[j], 0);
+        printnumber(binaryNum[j], 0, 0);
         r++;
     }
     return (r);
 }
 
-unsigned int _octal(unsigned int n)
+unsigned int _octal(unsigned int n, int l, int t)
 {
-    unsigned int q, r;
+    unsigned int q, r, d;
     unsigned int arr[50], w = 1, e;
+    int f = 0;
 
     if (n == 0)
     {
+        if (l == 5)
+        {
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            f += 5;
+        }
+        if (t == 6 && l == 0)
+        {
+        _putchar(' ');
+        _putchar(' ');
+        _putchar(' ');
+        _putchar(' ');
+        _putchar(' ');
+        f += 5;
+        }
         printunnumber(0);
-        return (2);
+        return (2 + f);
     }
     q = n;
     while (q != 0)
@@ -170,6 +258,24 @@ unsigned int _octal(unsigned int n)
     r = w;
     for (e = w - 1; e > 0; e--)
     {
+        if (l == 5 && n < 100000)
+        {
+            for (d = 0; d < (6 - w + 1); d++)
+            {
+                _putchar('0');
+                r++;
+            }
+            l = 6;
+        }
+        if (t == 6 && n < 100000 && l == 0)
+        {
+            for (d = 0; d < (6 - w + 1); d++)
+            {
+                _putchar(' ');
+                r++;
+            }
+            t++;
+        }
         printunnumber( arr[e]);
     }
 
@@ -192,15 +298,34 @@ void _switch(int n, char x)
     _putchar(s);
 }
 
-unsigned int _hexadecimal(long int n)
+unsigned int _hexadecimal(long int n, int l, int t)
 {
-    unsigned int q, r;
+    unsigned int q, r, d;
     unsigned int arr[50], w = 1, e;
+    int f = 0;
 
     if (n == 0)
     {
+        if (l == 5)
+        {
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            f += 5;
+        }
+        else if (t == 6)
+        {
+            _putchar(' ');
+            _putchar(' ');
+            _putchar(' ');
+            _putchar(' ');
+            _putchar(' ');
+            f += 5;
+        }
         printunnumber(0);
-        return (2);
+        return (2 + f);
     }
     q = n;
     while (q != 0)
@@ -211,6 +336,24 @@ unsigned int _hexadecimal(long int n)
     r = w;
     for (e = w - 1; e > 0; e--)
     {
+        if (l == 5 && n < 100000)
+        {
+            for (d = 0; d < (6 - w + 1); d++)
+            {
+                _putchar('0');
+                r++;
+            }
+            l++;
+        }
+        else if (t == 6 && n < 100000 && l < 5 )
+        {
+            for (d = 0; d < (6 - w + 1); d++)
+            {
+                _putchar(' ');
+                r++;
+            }
+            t++;
+        }
         if (arr[e] >= 10)
         {
             _switch(arr[e], 'x');
@@ -224,16 +367,35 @@ unsigned int _hexadecimal(long int n)
     return (r);
 }
 
-unsigned int _Hexadecimal(long int n)
+unsigned int _Hexadecimal(long int n, int l, int t)
 {
-    unsigned int q, r;
+    unsigned int q, r, d;
     unsigned int arr[50], w = 1, e;
+    int f = 0;
 
 
     if (n == 0)
     {
+        if (l == 5)
+        {
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            _putchar('0');
+            f += 5;
+        }
+        else if (t == 6)
+        {
+            _putchar(' ');
+            _putchar(' ');
+            _putchar(' ');
+            _putchar(' ');
+            _putchar(' ');
+            f += 5;
+        }
         printunnumber(0);
-        return (2);
+        return (2 + f);
     }
     q = n;
     while (q != 0)
@@ -244,6 +406,24 @@ unsigned int _Hexadecimal(long int n)
     r = w;
     for (e = w - 1; e > 0; e--)
     {
+        if (l == 5 && n < 100000)
+        {
+            for (d = 0; d < (6 - w + 1); d++)
+            {
+                _putchar('0');
+                r++;
+            }
+            l++;
+        }
+        else if (t == 6 && n < 100000 && l < 5)
+        {
+            for (d = 0; d < (6 - w + 1); d++)
+            {
+                _putchar(' ');
+                r++;
+            }
+            t++;
+        }
         if (arr[e] >= 10)
         {
             _switch(arr[e], 'X');
@@ -257,9 +437,9 @@ unsigned int _Hexadecimal(long int n)
     return (r);
 }
 
-int _Put(char *w)
+int _Put(char *w, int t)
 {
-    int r = 0, q = 0;
+    int r = 0, q = 0, u;
 
     if (w == NULL)
     {
@@ -271,6 +451,14 @@ int _Put(char *w)
         while (w[q])
         {
             q++;
+        }
+        if (t != 0)
+        {
+            for (u = 0; u < (t - q); u++)
+            {
+                _putchar(' ');
+                r++;
+            }
         }
         _put(w, q);
     }
@@ -303,7 +491,7 @@ int _PUT(char *w)
                     _putchar('0');
                     r++;
                 }
-                _Hexadecimal(w[q]);
+                _Hexadecimal(w[q], 0, 0);
                 r += 2;
             }
             q++;
@@ -369,12 +557,19 @@ int _rot13(char *s)
     }
     while (s[w] != '\0')
     {
-        for (r = 0; r < 51; r++)
+        if ((s[w] >= 65 && s[w] <= 90) || (s[w] >= 97 && s[w] <= 122))
+        {
+        for (r = 0; r < 52; r++)
         {
             if (s[w] == a[r])
             {
                 _putchar(b[r]);
             }
+        }
+        }
+        else
+        {
+            _putchar(s[w]);
         }
         w++;
     }
@@ -383,9 +578,10 @@ int _rot13(char *s)
 
 int _printf(const char *format, ...)
 {
-    int d = 0,r = 0, e = 0, q, o, b, a, l = 0, z, v;
+    int d = 0,r = 0, e = 0, q, o = 0, b, a, l = 0, z, v, y, g = 0, W, O = 0, K;
     int long t, j;
     char *w;
+    char *R;
     va_list s;
     unsigned int m, u;
 
@@ -402,12 +598,54 @@ int _printf(const char *format, ...)
             switch (format[e])
             {
                 case '%':
-                	if (format[e + 1] == 'l' || format[e + 1] == 'h')
-                	{
-                		e++;
-                		r--;
-				o++;
-			}
+                    if (format[e + 1] == '-')
+                    {
+                        if (format[e + 2] == '6')
+                        {
+                            r--;
+                            e++;
+                            l = 7;
+                        }
+                        r--;
+                        e++;
+                    }
+                    if (format[e + 1] == '.' || format[e + 1] == '0')
+                    {
+                        if (format[e + 2] == '6')
+                        {
+                            e++;
+                            l = 5;
+                            r--;
+                        }
+                        else if (format[e + 2] == '0')
+                        {
+                            e++;
+                            r--;
+                            l = 6;
+                        }
+                        else if (format[e + 2] == 'd' || format[e + 2] == 'u' || format[e + 2] == 'o' || format[e + 2] == 'x' || format[e + 2] == 'X' || format[e + 2] == 's')
+                        {
+                            l = 6;
+                        }
+                        e++;
+                    }
+                    if (format[e + 1] == '*')
+                    {
+                        e++;
+                        l = 4;
+                        g = 1;
+                    }
+                    if (format[e + 1] == '6')
+                    {
+                        e++;
+                        l = 4;
+                    }
+                    if (format[e + 1] == 'l' || format[e + 1] == 'h')
+                    {
+                        e++;
+                        r--;
+                        o++;
+                    }
                     if (format[e + 1] == ' ' && format[e + 2] == '+')
                     {
                         e++;
@@ -443,31 +681,142 @@ int _printf(const char *format, ...)
                             r--;
                             break;
                         case 'c':
+                            if (g == 1)
+                            {
+                                va_arg(s, int);
+                            }
+                            if (l != 4)
+                            {
                             _putchar(va_arg(s, int));
                             r--;
                             e++;
+                            }
+                            else
+                            {
+                                y = va_arg(s, int);
+                                _putchar(' ');
+                                _putchar(' ');
+                                _putchar(' ');
+                                _putchar(' ');
+                                _putchar(' ');
+                                _putchar(y);
+                                r += 3;
+                                e++;
+                            }
                             break;
                         case 's':
+                            if (g == 1)
+                            {
+                                va_arg(s, char *);
+                            }
+                            if (l == 5)
+                            {
+                                R = va_arg(s, char *);
+                                while (R[O] != '\0')
+                                {
+                                    O++;
+                                }
+                                if (O > 6)
+                                {
+                                    O = 6;
+                                }
+                                _put(R, O);
+                                r += O - 3;
+                                e++;
+                            }
+                            else if (l == 6)
+                            {
+                                e++;
+                                r = 0;
+                            }
+                            else if (l != 4)
+                            {
                             w = va_arg(s, char *);
-                            q = _Put(w);
+                            q = _Put(w, 0);
                             r += q - 2;
                             e++;
+                            }
+                            else
+                            {
+                                w = va_arg(s, char *);
+                                q = _Put(w, 6);
+                                r += q - 3;
+                                e++;
+                            }
                             break;
                         case 'd':
                         case 'i':
-
+                            if (g == 1)
+                            {
+                                va_arg(s, int);
+                            }
+                            if (l == 7)
+                            {
+                                z = va_arg(s, int);
+                                if (z == INT_MIN)
+                                {
+                                    _putchar('-');
+                                    o += printunnumber(INT_MIN);
+                                    o--;
+                                }
+                                else
+                                {
+                                    o = printnumber(z, l, 0);
+                                }
+                                for (K = 0; K < 5; K++)
+                                {
+                                    if (o + 2 < 6)
+                                    {
+                                        _putchar(' ');
+                                        o = 5;
+                                    }
+                                }
+                                r += o - 1;
+                                e++;
+                            }
+                            else if (l == 6)
+                            {
+                                W = va_arg(s, int);
+                                if (W == 0)
+                                {
+                                    e++;
+                                    r -= 3;
+                                }
+                                else
+                                {
+                                    o = printnumber(W, l, 0);
+                                    r += o - 2;
+                                    e++;
+                                }
+                            }
+                            else if (l == 5)
+                            {
+                                o = printnumber(va_arg(s, int), l, 6);
+                                r += o - 2;
+                                e++;
+                            }
+                            else if (l != 4)
+                            {
                             z = va_arg(s, int);
                             if (z == INT_MIN)
                             {
                                 _putchar('-');
-                               o += printunnumber(INT_MIN);
+                                o += printunnumber(INT_MIN);
+                                o--;
                             }
                             else
                             {
-                                o = printnumber(z, l);
+                                o = printnumber(z, l, 0);
                             }
-                            r += o - 2;
+                            r += o - 1;
                             e++;
+                            }
+                            else
+                            {
+                                o = printnumber(va_arg(s, int), l, 6);
+                                r += o - 2;
+                                e++;
+                            }
                             break;
                         case 'b':
                             b = binary(va_arg(s, int));
@@ -475,19 +824,155 @@ int _printf(const char *format, ...)
                             e++;
                             break;
                         case 'u':
-                            v = (unsigned int)va_arg(s, unsigned int);
-                            if (v < 0)
+                            if (g == 1)
                             {
-                            	a = printunnumber(v);
-                        	}
-                        	else
-                        	{
-                        		printnumber(v, 0);
-							}
-                            r += a - 2;
-                            e++;
+                                (unsigned int) va_arg(s, unsigned int);
+                            }
+                            if (l == 7)
+                            {
+                                v = (unsigned int) va_arg(s, unsigned int);
+                                if (v < 0)
+                                {
+                                    a = printunnumber(v);
+                                }
+                                else
+                                {
+                                    a = printnumber(v, 0, 0);
+                                    r++;
+                                }
+                                for (K = 0; K < 5; K++)
+                                {
+                                    if (a + 2 < 6)
+                                        a += 5;
+                                }
+                                r += a - 2;
+                                e++;
+                            }
+                            else if (l == 6)
+                            {
+                                W =  va_arg(s, unsigned int);
+                                if (W == 0)
+                                {
+                                    e++;
+                                    r -= 3;
+                                }
+                                else
+                                {
+                                    v = W;
+                                    if (v < 0)
+                                    {
+                                        a = printunnumber(v);
+                                        r--;
+                                    }
+                                    else
+                                    {
+                                        a = printnumber(v, l, 0);
+                                    }
+                                    r += a - 2;
+                                    e++;
+                                }
+                            }
+                            else if (l == 5)
+                            {
+                                v = (unsigned int) va_arg(s, unsigned int);
+                                if (v < 0)
+                                {
+                                    a = printunnumber(v);
+                                    r--;
+                                }
+                                else
+                                {
+                                    a = printnumber(v, l, 6);
+                                }
+                                r += a - 2;
+                                e++;
+                            }
+                            else if (l != 4)
+                            {
+                                v = (unsigned int) va_arg(s, unsigned int);
+                                if (v < 0)
+                                {
+                                    a = printunnumber(v);
+                                }
+                                else
+                                {
+                                    a = printnumber(v, 0, 0);
+                                    r++;
+                                }
+                                r += a - 2;
+                                e++;
+                            }
+                            else
+                            {
+                                v = (unsigned int) va_arg(s, unsigned int);
+                                if (v < 0)
+                                {
+                                    a = printunnumber(v);
+                                    r--;
+                                }
+                                else
+                                {
+                                    a = printnumber(v, 0, 6);
+                                }
+                                r += a - 2;
+                                e++;
+                            }
                             break;
                         case 'o':
+                            if (g == 1)
+                            {
+                                (unsigned int) va_arg(s, unsigned int);
+                            }
+                            if (l == 7)
+                            {
+                                if (l == 3)
+                                {
+                                    u = (unsigned int) va_arg(s, unsigned int);
+                                    if (u > 0)
+                                    {
+                                        _putchar('0');
+                                    }
+                                    else
+                                    {
+                                        r--;
+                                    }
+                                    m = _octal(u, 0, 0);
+                                }
+                                else
+                                {
+                                    m = _octal((unsigned int) va_arg(s, unsigned int), 0, 0);
+                                }
+                                for (K = 0; K < 5; K++)
+                                {
+                                    if (m + 2 < 6)
+                                        m += 5;
+                                }
+                                r += (int)m - 3;
+                                e++;
+                            }
+                            else if (l == 6)
+                            {
+                                W = va_arg(s, unsigned int);
+                                if (W == 0)
+                                {
+                                    e++;
+                                    r -= 3;
+                                }
+                                else
+                                {
+                                    m = _octal(W, l, 6);
+                                    r += (int)m - 4;
+                                    e++;
+                                }
+                            }
+                            else if (l == 5)
+                            {
+                                m = _octal((unsigned int) va_arg(s, unsigned int), l, 6);
+                                r += (int)m - 4;
+                                e++;
+                            }
+                            else if (l != 4)
+                            {
                             if (l == 3)
                             {
                                 u = (unsigned int) va_arg(s, unsigned int);
@@ -499,16 +984,79 @@ int _printf(const char *format, ...)
                                 {
                                     r--;
                                 }
-                                m = _octal(u);
+                                m = _octal(u, 0, 0);
                             }
                             else
                             {
-                                m = _octal((unsigned int) va_arg(s, unsigned int));
+                                m = _octal((unsigned int) va_arg(s, unsigned int), 0, 0);
                             }
                             r += (int)m - 3;
                             e++;
+                            }
+                            else
+                            {
+                                m = _octal((unsigned int) va_arg(s, unsigned int), 0, 6);
+                                r += (int)m - 4;
+                                e++;
+                            }
                             break;
                         case 'x':
+                            if (g == 1)
+                            {
+                                va_arg(s, long int);
+                            }
+                            if (l == 7)
+                            {
+                                if (l == 3)
+                                {
+                                    j = va_arg(s, long int);
+                                    if (j != 0)
+                                    {
+                                        _putchar('0');
+                                        _putchar('x');
+                                        r++;
+                                    }
+                                    else
+                                    {
+                                        r--;
+                                    }
+                                    m = _hexadecimal(j, l, 0);
+                                }
+                                else
+                                {
+                                    m = _hexadecimal(va_arg(s, long int), l, 0);
+                                }
+                                for (K = 0; K < 5; K++)
+                                {
+                                    if (m + 2 < 6)
+                                        m += 5;
+                                }
+                                r += (int)m - 3;
+                                e++;
+                            }
+                            else if (l == 6)
+                            {
+                                W = va_arg(s, long int);
+                                if (W == 0)
+                                {
+                                    e++;
+                                    r -= 3;
+                                }
+                                else
+                                {
+                                    m = _hexadecimal(W, l, 6);
+                                    r += (int)m - 4;
+                                    e++;
+                                }
+                            }
+                            else if (l == 5)
+                            {
+                                m = _hexadecimal(va_arg(s, long int), l, 6);
+                                r += (int)m - 4;
+                                e++;
+                            }
+                            else if (l != 4)
+                            {
                             if (l == 3)
                             {
                                 j = va_arg(s, long int);
@@ -522,16 +1070,79 @@ int _printf(const char *format, ...)
                                 {
                                     r--;
                                 }
-                                m = _hexadecimal(j);
+                                m = _hexadecimal(j, l, 0);
                             }
                             else
                             {
-                                m = _hexadecimal(va_arg(s, long int));
+                                m = _hexadecimal(va_arg(s, long int), l, 0);
                             }
                             r += (int)m - 3;
                             e++;
+                            }
+                            else
+                            {
+                                m = _hexadecimal(va_arg(s, long int), l, 6);
+                                r += (int)m - 4;
+                                e++;
+                            }
                             break;
                         case 'X':
+                            if (g == 1)
+                            {
+                                va_arg(s, long int);
+                            }
+                            if (l == 7)
+                            {
+                                if (l == 3)
+                                {
+                                    j = va_arg(s, long int);
+                                    if (j != 0)
+                                    {
+                                        _putchar('0');
+                                        _putchar('X');
+                                        r++;
+                                    }
+                                    else
+                                    {
+                                        r--;
+                                    }
+                                    m = _Hexadecimal(j, l, 0);
+                                }
+                                else
+                                {
+                                    m = _Hexadecimal(va_arg(s, long int), l, 0);
+                                }
+                                for (K = 0; K < 5; K++)
+                                {
+                                    if (m + 2 < 6)
+                                        m += 5;
+                                }
+                                r += (int)m - 3;
+                                e++;
+                            }
+                            else if (l == 6)
+                            {
+                                W = va_arg(s, long int);
+                                if (W == 0)
+                                {
+                                    e++;
+                                    r -= 3;
+                                }
+                                else
+                                {
+                                    m = _Hexadecimal(W, l, 6);
+                                    r += (int)m - 4;
+                                    e++;
+                                }
+                            }
+                            else if (l == 5)
+                            {
+                                m = _Hexadecimal(va_arg(s, long int), l, 6);
+                                r += (int)m - 4;
+                                e++;
+                            }
+                            else if (l != 4)
+                            {
                             if (l == 3)
                             {
                                 j = va_arg(s, long int);
@@ -545,14 +1156,21 @@ int _printf(const char *format, ...)
                                 {
                                     r--;
                                 }
-                                m = _Hexadecimal(j);
+                                m = _Hexadecimal(j, l, 0);
                             }
                             else
                             {
-                                m = _Hexadecimal(va_arg(s, long int));
+                                m = _Hexadecimal(va_arg(s, long int), l, 0);
                             }
                             r += (int)m - 3;
                             e++;
+                            }
+                            else
+                            {
+                                m = _Hexadecimal(va_arg(s, long int), l, 6);
+                                r += (int)m - 4;
+                                e++;
+                            }
                             break;
                         case 'S':
 
@@ -601,4 +1219,3 @@ int _printf(const char *format, ...)
     va_end(s);
     return (r);
 }
-
